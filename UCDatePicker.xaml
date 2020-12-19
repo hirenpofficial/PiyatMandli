@@ -1,0 +1,105 @@
+﻿<UserControl x:Class="PiyatMandli.UCDatePicker"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PiyatMandli"
+             mc:Ignorable="d" Height="50" Width="600" FontSize="30" Loaded="UserControl_Loaded">
+
+    <Grid>
+        <TextBox x:Name="TXTDatePicker" IsReadOnly="True"></TextBox>
+
+        <Popup IsOpen="{Binding ElementName=TXTDatePicker,Path=IsFocused, Mode=OneWay}"   
+       PlacementTarget="{Binding ElementName=TXTDatePicker}"              
+       AllowsTransparency="True"
+       PopupAnimation="Slide" Width="600"  >
+            <Border BorderBrush="White" BorderThickness="3,3,0,0">
+                <Border BorderBrush="Black" BorderThickness="1,1,3,3">
+                    <Grid x:Name="GBDates" Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                            <RowDefinition></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock x:Name="TBPrevious" Text="&lt;" Width="70" TextAlignment="Center" VerticalAlignment="Center" PreviewMouseLeftButtonDown="TBPrevious_PreviewMouseLeftButtonDown"></TextBlock>
+                        <TextBlock x:Name="LBLMonth" Text="જાન્યુઆરી ૨૦૨૦" Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="5" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock x:Name="TBNext" Text="&gt;" Width="70" Grid.Row="0" Grid.Column="7" TextAlignment="Center" VerticalAlignment="Center" PreviewMouseLeftButtonDown="TBNext_PreviewMouseLeftButtonDown"></TextBlock>
+                        
+                        <TextBlock Text="સોમ" Grid.Row="1" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock Text="મંગળ" Grid.Row="1" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock Text="બુધ" Grid.Row="1" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock Text="ગુરૂ" Grid.Row="1" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock Text="શુક્ર" Grid.Row="1" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock Text="શનિ" Grid.Row="1" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+                        <TextBlock Text="રવિ" Grid.Row="1" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center"></TextBlock>
+
+                        <TextBlock x:Name="TB_1" Text="" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_2" Text="" Grid.Row="2" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_3" Text="" Grid.Row="2" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_4" Text="" Grid.Row="2" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_5" Text="" Grid.Row="2" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_6" Text="" Grid.Row="2" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_7" Text="" Grid.Row="2" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+
+                        <TextBlock x:Name="TB_8" Text="" Grid.Row="3" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_9" Text="" Grid.Row="3" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_10" Text="" Grid.Row="3" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_11" Text="" Grid.Row="3" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_12" Text="" Grid.Row="3" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_13" Text="" Grid.Row="3" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_14" Text="" Grid.Row="3" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+
+                        <TextBlock x:Name="TB_15" Text="" Grid.Row="4" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_16" Text="" Grid.Row="4" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_17" Text="" Grid.Row="4" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_18" Text="" Grid.Row="4" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_19" Text="" Grid.Row="4" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_20" Text="" Grid.Row="4" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_21" Text="" Grid.Row="4" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+
+                        <TextBlock x:Name="TB_22" Text="" Grid.Row="5" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_23" Text="" Grid.Row="5" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_24" Text="" Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_25" Text="" Grid.Row="5" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_26" Text="" Grid.Row="5" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_27" Text="" Grid.Row="5" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_28" Text="" Grid.Row="5" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+
+                        <TextBlock x:Name="TB_29" Text="" Grid.Row="6" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_30" Text="" Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_31" Text="" Grid.Row="6" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_32" Text="" Grid.Row="6" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_33" Text="" Grid.Row="6" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_34" Text="" Grid.Row="6" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_35" Text="" Grid.Row="6" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+
+                        <TextBlock x:Name="TB_36" Text="" Grid.Row="7" Grid.Column="0" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_37" Text="" Grid.Row="7" Grid.Column="1" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_38" Text="" Grid.Row="7" Grid.Column="2" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_39" Text="" Grid.Row="7" Grid.Column="3" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_40" Text="" Grid.Row="7" Grid.Column="4" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_41" Text="" Grid.Row="7" Grid.Column="5" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+                        <TextBlock x:Name="TB_42" Text="" Grid.Row="7" Grid.Column="6" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TextBlock_PreviewMouseDown"></TextBlock>
+
+                        <TextBlock Text="" x:Name="TBTodaysDate" Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="7" VerticalAlignment="Center" TextAlignment="Center" PreviewMouseDown="TBTodaysDate_PreviewMouseDown"></TextBlock>
+                    </Grid>
+                </Border>
+            </Border>
+        </Popup>
+    </Grid>
+</UserControl>

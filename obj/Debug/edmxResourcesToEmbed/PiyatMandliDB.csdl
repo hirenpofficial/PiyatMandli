@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PiyatMandliModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Config">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FlagName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FlagValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FarmerLand">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmerId" Type="Int32" Nullable="false" />
+    <Property Name="BlockNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="SurveyNo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="WindowId" Type="Int32" Nullable="false" />
+    <Property Name="LandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LandArea" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="LandAreaEng" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Farmer" Relationship="Self.FK_FarmerLands_Farmers" FromRole="FarmerLands" ToRole="Farmers" />
+    <NavigationProperty Name="WindowMaster" Relationship="Self.FK_FarmerLands_WindowMaster" FromRole="FarmerLands" ToRole="WindowMaster" />
+  </EntityType>
+  <EntityType Name="Farmer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FarmerCode" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="ShareNo" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Name" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirth" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfBirthEng" Type="DateTime" Precision="3" />
+    <Property Name="AddressLine1" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="AddressLine2" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+    <Property Name="Village" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="State" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="Pincode" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNo2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo1" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="MobileNo2" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfRegistration" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DateOfRegistrationEng" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="FarmerLands" Relationship="Self.FK_FarmerLands_Farmers" FromRole="Farmers" ToRole="FarmerLands" />
+  </EntityType>
+  <EntityType Name="WindowMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WindowName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="FarmerLands" Relationship="Self.FK_FarmerLands_WindowMaster" FromRole="WindowMaster" ToRole="FarmerLands" />
+  </EntityType>
+  <Association Name="FK_FarmerLands_Farmers">
+    <End Role="Farmers" Type="Self.Farmer" Multiplicity="1" />
+    <End Role="FarmerLands" Type="Self.FarmerLand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farmers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerLands">
+        <PropertyRef Name="FarmerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmerLands_WindowMaster">
+    <End Role="WindowMaster" Type="Self.WindowMaster" Multiplicity="1" />
+    <End Role="FarmerLands" Type="Self.FarmerLand" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WindowMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerLands">
+        <PropertyRef Name="WindowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PiyatMandliEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Configs" EntityType="Self.Config" />
+    <EntitySet Name="FarmerLands" EntityType="Self.FarmerLand" />
+    <EntitySet Name="Farmers" EntityType="Self.Farmer" />
+    <EntitySet Name="WindowMasters" EntityType="Self.WindowMaster" />
+    <AssociationSet Name="FK_FarmerLands_Farmers" Association="Self.FK_FarmerLands_Farmers">
+      <End Role="Farmers" EntitySet="Farmers" />
+      <End Role="FarmerLands" EntitySet="FarmerLands" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmerLands_WindowMaster" Association="Self.FK_FarmerLands_WindowMaster">
+      <End Role="WindowMaster" EntitySet="WindowMasters" />
+      <End Role="FarmerLands" EntitySet="FarmerLands" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

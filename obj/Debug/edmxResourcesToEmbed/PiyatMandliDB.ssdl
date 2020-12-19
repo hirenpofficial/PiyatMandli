@@ -1,0 +1,105 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PiyatMandliModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Configs">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FlagName" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="FlagValue" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="FarmerLands">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FarmerId" Type="int" Nullable="false" />
+    <Property Name="BlockNo" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="SurveyNo" Type="nvarchar" MaxLength="20" />
+    <Property Name="WindowId" Type="int" Nullable="false" />
+    <Property Name="LandName" Type="nvarchar" MaxLength="50" />
+    <Property Name="LandArea" Type="nvarchar" MaxLength="50" />
+    <Property Name="LandAreaEng" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Farmers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FarmerCode" Type="nvarchar" MaxLength="100" />
+    <Property Name="ShareNo" Type="nvarchar" MaxLength="50" />
+    <Property Name="Name" Type="nvarchar" MaxLength="2000" />
+    <Property Name="DateOfBirth" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfBirthEng" Type="datetime" />
+    <Property Name="AddressLine1" Type="nvarchar" MaxLength="2000" />
+    <Property Name="AddressLine2" Type="nvarchar" MaxLength="2000" />
+    <Property Name="Village" Type="nvarchar" MaxLength="100" />
+    <Property Name="City" Type="nvarchar" MaxLength="100" />
+    <Property Name="State" Type="nvarchar" MaxLength="100" />
+    <Property Name="Country" Type="nvarchar" MaxLength="100" />
+    <Property Name="Pincode" Type="nvarchar" MaxLength="20" />
+    <Property Name="PhoneNo1" Type="nvarchar" MaxLength="20" />
+    <Property Name="PhoneNo2" Type="nvarchar" MaxLength="20" />
+    <Property Name="MobileNo1" Type="nvarchar" MaxLength="20" />
+    <Property Name="MobileNo2" Type="nvarchar" MaxLength="20" />
+    <Property Name="DateOfRegistration" Type="nvarchar" MaxLength="50" />
+    <Property Name="DateOfRegistrationEng" Type="datetime" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="DateModified" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="WindowMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="WindowName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_FarmerLands_Farmers">
+    <End Role="Farmers" Type="Self.Farmers" Multiplicity="1" />
+    <End Role="FarmerLands" Type="Self.FarmerLands" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Farmers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerLands">
+        <PropertyRef Name="FarmerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_FarmerLands_WindowMaster">
+    <End Role="WindowMaster" Type="Self.WindowMaster" Multiplicity="1" />
+    <End Role="FarmerLands" Type="Self.FarmerLands" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WindowMaster">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="FarmerLands">
+        <PropertyRef Name="WindowId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="PiyatMandliModelStoreContainer">
+    <EntitySet Name="Configs" EntityType="Self.Configs" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FarmerLands" EntityType="Self.FarmerLands" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Farmers" EntityType="Self.Farmers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="WindowMaster" EntityType="Self.WindowMaster" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_FarmerLands_Farmers" Association="Self.FK_FarmerLands_Farmers">
+      <End Role="Farmers" EntitySet="Farmers" />
+      <End Role="FarmerLands" EntitySet="FarmerLands" />
+    </AssociationSet>
+    <AssociationSet Name="FK_FarmerLands_WindowMaster" Association="Self.FK_FarmerLands_WindowMaster">
+      <End Role="WindowMaster" EntitySet="WindowMaster" />
+      <End Role="FarmerLands" EntitySet="FarmerLands" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

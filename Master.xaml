@@ -1,0 +1,46 @@
+﻿<Controls:MetroWindow x:Class="PiyatMandli.Master"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PiyatMandli"
+        mc:Ignorable="d"
+        Title="Master" BorderBrush="#FF8E6104" BorderThickness="1" ResizeMode="CanMinimize" Height="800" Width="1024" WindowStartupLocation="Manual" Loaded="MetroWindow_Loaded" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" Left="0" Top="0" StateChanged="MetroWindow_StateChanged" >
+    
+    <DockPanel x:Name="STPBodyPanel" DockPanel.Dock="Bottom">
+        <DockPanel x:Name="STPLeftPanel" Width="200" Margin="0 0 0 0" Background="#FF300000" >
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Margin="0,0,0,0">
+            </StackPanel>
+            <Button x:Name="BTNToggleLeftPanel" FontFamily="Marlett" DockPanel.Dock="Top" FontSize="30" Visibility="Collapsed" HorizontalAlignment="Right" Content="3" VerticalAlignment="Top" Height="38" Click="BTNToggleLeftPanel_Click" Width="29"  >
+            </Button>
+            <StackPanel DockPanel.Dock="Top" Orientation="Vertical" Name="SPIcon" Margin="0" >
+                <Button Name="BTNDashboard" Style="{StaticResource LeftMenuButton}">
+                    <StackPanel Orientation="Horizontal" Width="180" VerticalAlignment="Center">
+                        <Image Source="/Images/dashboard.png" Width="26" Height="26" Margin="5,0,10,0" />
+                        <TextBlock Style="{StaticResource LeftMenuLabel}">Dashboard</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="BTNManageFarmers" Style="{StaticResource LeftMenuButton}" Click="BTNManageFarmers_Click">
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>
+                        <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">ખેડૂતો સાચવો</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Name="BTNLogout"  Style="{StaticResource LeftMenuButton}">
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="/Images/button-power.png" Width="26" Height="26" Margin="5,0,10,0"/>
+                        <TextBlock Style="{StaticResource LeftMenuLabel}">Logout</TextBlock>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </DockPanel>
+        <DockPanel x:Name="STPHeadPanel" DockPanel.Dock="Top" Height="41" Margin="0 0 0 0"  Background="#FF300000">
+            <Menu x:Name="MainMenu" FontFamily="Verdana"  Margin="0"  
+                      ScrollViewer.CanContentScroll="True" HorizontalAlignment="Left" VerticalContentAlignment="Center" DockPanel.Dock="Right" Background="Transparent"  IsMainMenu="True"  />
+        </DockPanel>
+        <DockPanel x:Name="STPContentPanel" DockPanel.Dock="Right"  Margin="0 0 0 0" Button.Click="_mainFrame_Click_1" Background="#FFFFFF">
+            <Frame x:Name="_mainFrame"  VerticalAlignment="Top" DockPanel.Dock="Top" />
+        </DockPanel>
+    </DockPanel>
+</Controls:MetroWindow>
