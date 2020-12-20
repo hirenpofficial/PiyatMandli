@@ -14,10 +14,11 @@ namespace PiyatMandli
         /// All the config values are available here
         /// </summary>
         public static Dictionary<string, string> Configs { get; set; }
-        /// <summary>
-        /// Application Start up form
-        /// </summary>
-        //public static MasterForm MasterForm { get; set; }
+
+        public static class Constants
+        {
+            public static string ApplicatioName { get; set; }
+        }
         /// <summary>
         /// Flag Names constatns
         /// </summary>

@@ -170,6 +170,10 @@ namespace PiyatMandli
                         btn.FontWeight = FontWeights.UltraBold;
                     }
                 }
+                if (date.OriginalDate == DateTime.Now.Date)
+                {
+                    btn.FontWeight = FontWeights.UltraBold;
+                }
             }
             GBDates.UpdateLayout();
         }
@@ -233,6 +237,7 @@ namespace PiyatMandli
             totalDays = CalculateTotalDays(currentMonth, currentYear);
             TXTDatePicker.Text = SelectedDate.Value.ToShortDateString().ToGujarati();
             Generate();
+            PPDatePicker.IsOpen = false;
         }
 
         private void TextBlock_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -244,6 +249,7 @@ namespace PiyatMandli
             currentYear = SelectedDate.Value.Year;
             TXTDatePicker.Text = SelectedDate.Value.ToShortDateString().ToGujarati();
             Generate();
+            PPDatePicker.IsOpen = false;
         }
 
         private void TBPrevious_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -266,6 +272,21 @@ namespace PiyatMandli
                 currentYear = currentYear + 1;
             }
             Generate();
+        }
+
+        private void TXTDatePicker_LostFocus(object sender, RoutedEventArgs e)
+        {
+            PPDatePicker.IsOpen = false;
+        }
+
+        private void TXTDatePicker_GotFocus(object sender, RoutedEventArgs e)
+        {
+            PPDatePicker.IsOpen = true;
+        }
+
+        private void TXTDatePicker_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            PPDatePicker.IsOpen = !PPDatePicker.IsOpen;
         }
     }
 

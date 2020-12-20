@@ -1,0 +1,86 @@
+﻿<Page x:Class="PiyatMandli.Forms.ManageWindows"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:PiyatMandli.Forms"
+      xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+      xmlns:fa="http://schemas.fontawesome.com/icons/"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="800"
+      Title="ManageWindows" FontSize="16" Loaded="Page_Loaded">
+
+    <DockPanel VerticalAlignment="Top" Name="DPTop">
+        <DockPanel x:Name="DPHeader" DockPanel.Dock="Top" Style="{StaticResource PageTitleBlock}">
+            <!--<Label x:Name="LBLPageHeader" Content="Person Account" Style="{StaticResource PageTitle}"/>-->
+            <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,0,0"/>
+            <Label Style="{StaticResource PageTitle}" FontSize="20">બારીની યાદી</Label>
+
+            <Button Style="{DynamicResource MetroSquareButtonStyle}" x:Name="BTNClose" Height="40" Width="40" HorizontalAlignment="Right" Foreground="White" Background="#FF300000">
+                <Rectangle Width="20" Height="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_close}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </DockPanel>
+        <Grid HorizontalAlignment="Left" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="300"></ColumnDefinition>
+                <ColumnDefinition Width="400"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Vertical" Grid.Column="0" x:Name="STPList">
+                <StackPanel Orientation="Vertical">
+                    <TextBox x:Name="txtSearchString" VerticalContentAlignment="Center" Margin="0 10 0 10" FontSize="16"
+                         Controls:TextBoxHelper.Watermark="બારી શોધો"
+                         Controls:TextBoxHelper.UseFloatingWatermark="False"
+                         Controls:TextBoxHelper.IsWaitingForData="False"
+                         Controls:TextBoxHelper.ClearTextButton="True"  BorderBrush="#FF300000" BorderThickness="2" TextChanged="txtSearchString_TextChanged"/>
+                    <ListBox x:Name="LSTRecords" Height="500" BorderBrush="#FF300000" BorderThickness="2" SelectionChanged="LSTRecords_SelectionChanged"></ListBox>
+                    <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                        <Button x:Name="BTNAdd" ToolTip="નવી બારી ઉમેરો" TabIndex="2" Margin="0 0 10 0" BorderBrush="#FF300000" BorderThickness="2" Click="BTNAdd_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome Icon="Solid_Plus" Height="15" Foreground="#FF300000" />
+                                <TextBlock Text="નવું" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="BTNEdit" ToolTip="બારીની માહિતી સુધારો" TabIndex="2" Margin="0 0 10 0" BorderBrush="#FF300000" BorderThickness="2" Click="BTNEdit_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome Icon="Solid_Edit" Height="15" Foreground="#FF300000" />
+                                <TextBlock Text="સુધારો" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="BTNDelete" ToolTip="બારીની માહિતી કાઢો" TabIndex="2" Margin="0 0 10 0" BorderBrush="#FF300000" BorderThickness="2" Click="BTNDelete_Click">
+                            <StackPanel Orientation="Horizontal">
+                                <fa:ImageAwesome Icon="Solid_WindowClose" Height="15" Foreground="#FF300000" />
+                                <TextBlock Text="કાઢો" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel x:Name="STPEntry" Grid.Column="1" Margin="10">
+                <StackPanel>
+                    <TextBlock>બારીનું નામ :</TextBlock>
+                    <TextBox x:Name="TXTWindowName" FontSize="16"
+                                Controls:TextBoxHelper.Watermark="બારીનું નામ"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10" HorizontalAlignment="Center">
+                    <Button x:Name="BTNSave" ToolTip="બારીની માહિતીનો સંગ્રહ કરો" TabIndex="2" Margin="0 0 10 0" BorderBrush="#FF300000" BorderThickness="2" Click="BTNSave_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Solid_Save" Height="15" Foreground="#FF300000" />
+                            <TextBlock Text="સંગ્રહ" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BTNCancel" ToolTip="રદ કરો" TabIndex="2" Margin="0 0 10 0" BorderBrush="#FF300000" BorderThickness="2" Click="BTNCancel_Click">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Regular_WindowClose" Height="15" Foreground="#FF300000"/>
+                            <TextBlock Text="રદ કરો" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Page>

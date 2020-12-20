@@ -58,11 +58,25 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="WindowName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="WindowName" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="IsActive" Type="bit" Nullable="false" />
     <Property Name="IsDeleted" Type="bit" Nullable="false" />
     <Property Name="CreatedDate" Type="datetime" Nullable="false" />
     <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="YearMaster">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Year" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="Rate" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="ClosingDate" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="StartingDate" Type="nvarchar" MaxLength="20" />
+    <Property Name="CreatedDate" Type="datetime" Nullable="false" />
+    <Property Name="ModifiedDate" Type="datetime" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="IsDeleted" Type="bit" Nullable="false" />
   </EntityType>
   <Association Name="FK_FarmerLands_Farmers">
     <End Role="Farmers" Type="Self.Farmers" Multiplicity="1" />
@@ -93,6 +107,7 @@
     <EntitySet Name="FarmerLands" EntityType="Self.FarmerLands" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Farmers" EntityType="Self.Farmers" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="WindowMaster" EntityType="Self.WindowMaster" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="YearMaster" EntityType="Self.YearMaster" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_FarmerLands_Farmers" Association="Self.FK_FarmerLands_Farmers">
       <End Role="Farmers" EntitySet="Farmers" />
       <End Role="FarmerLands" EntitySet="FarmerLands" />

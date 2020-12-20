@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -19,7 +20,8 @@ namespace PiyatMandli
 {
     /// <summary>
     /// Interaction logic for Master.xaml
-    /// </summary>
+    /// </summary>[DllImport("user32.dll")] 
+   
     public partial class Master : MetroWindow
     {
         private Window[] childWindows;
@@ -30,8 +32,19 @@ namespace PiyatMandli
             foreach (var key in configs)
             {
                 AppManager.Configs.Add(key.FlagName, key.FlagValue);
-
             }
+            AppManager.Constants.ApplicatioName = AppManager.GetFlag(AppManager.ApplicationFlag.ApplicationName);
+
+            var langs = InputLanguageManager.Current.AvailableInputLanguages;
+            foreach (System.Globalization.CultureInfo lang in langs)
+            {
+                if (lang.Name.ToLower().StartsWith("gu-"))
+                {
+                    InputLanguageManager.SetInputLanguage(this, lang);
+                    break;
+                }
+            }
+
             InitializeComponent();
         }
         #region Windows Method
@@ -120,6 +133,25 @@ namespace PiyatMandli
         private void BTNManageFarmers_Click(object sender, RoutedEventArgs e)
         {
             Uri uri = new Uri("/Forms/ManageFarmers.xaml", UriKind.Relative);
+            _mainFrame.Navigate(uri);
+        }
+
+        private void MetroWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            var langs = InputLanguageManager.Current.AvailableInputLanguages;
+            foreach (System.Globalization.CultureInfo lang in langs)
+            {
+                if (lang.Name.ToLower().StartsWith("en-"))
+                {
+                    InputLanguageManager.SetInputLanguage(this, lang);
+                    break;
+                }
+            }
+        }
+
+        private void BTNManageWindows_Click(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("/Forms/ManageWindows.xaml", UriKind.Relative);
             _mainFrame.Navigate(uri);
         }
     }

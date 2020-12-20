@@ -6,7 +6,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PiyatMandli"
         mc:Ignorable="d"
-        Title="Master" BorderBrush="#FF8E6104" BorderThickness="1" ResizeMode="CanMinimize" Height="800" Width="1024" WindowStartupLocation="Manual" Loaded="MetroWindow_Loaded" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" Left="0" Top="0" StateChanged="MetroWindow_StateChanged" >
+        Title="Master" BorderBrush="#FF8E6104" BorderThickness="1" ResizeMode="CanMinimize" Height="800" Width="1024" WindowStartupLocation="Manual" Loaded="MetroWindow_Loaded" ScrollViewer.VerticalScrollBarVisibility="Disabled" VerticalContentAlignment="Stretch" Left="0" Top="0" StateChanged="MetroWindow_StateChanged" Closing="MetroWindow_Closing" >
     
     <DockPanel x:Name="STPBodyPanel" DockPanel.Dock="Bottom">
         <DockPanel x:Name="STPLeftPanel" Width="200" Margin="0 0 0 0" Background="#FF300000" >
@@ -21,10 +21,16 @@
                         <TextBlock Style="{StaticResource LeftMenuLabel}">Dashboard</TextBlock>
                     </StackPanel>
                 </Button>
+                <Button Name="BTNManageWindows" Style="{StaticResource LeftMenuButton}" Click="BTNManageWindows_Click">
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>
+                        <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">બારીની યાદી</TextBlock>
+                    </StackPanel>
+                </Button>
                 <Button Name="BTNManageFarmers" Style="{StaticResource LeftMenuButton}" Click="BTNManageFarmers_Click">
                     <StackPanel Orientation="Horizontal" Width="180">
                         <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>
-                        <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">ખેડૂતો સાચવો</TextBlock>
+                        <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">ખેડૂતોની યાદી</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Name="BTNLogout"  Style="{StaticResource LeftMenuButton}">

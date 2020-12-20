@@ -123,5 +123,47 @@ namespace PiyatMandli
         }
 
         #endregion Farmers
+
+        #region Windows
+
+        public IQueryable<WindowMaster> GetAll_Windows()
+        {
+            var db = GetDataContext();
+            return db.WindowMasters;
+        }
+
+        public int AddEntity_Window(WindowMaster entity)
+        {
+            var db = GetDataContext();
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            entity.IsActive = true;
+            entity.IsDeleted = false;
+            db.WindowMasters.Add(entity);
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public int UpdateEntity_Window(WindowMaster model)
+        {
+            var db = GetDataContext();
+            var entity = db.WindowMasters.FirstOrDefault(x => x.Id == model.Id);
+            entity.WindowName = model.WindowName;
+            entity.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public bool RemoveEntity_Window(int windowId)
+        {
+            var db = GetDataContext();
+            var entity = db.WindowMasters.FirstOrDefault(x => x.Id == windowId);
+            entity.IsDeleted = true;
+            entity.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return true;
+        }
+
+        #endregion Windows
     }
 }

@@ -86,7 +86,6 @@ namespace PiyatMandli
                 IsDeleted = farmer.IsDeleted,
                 DateCreated = farmer.DateCreated,
                 DateModified = farmer.DateModified,
-                FarmerLands = farmer.Lands.Select(y => y.ToEntity()).ToList()
             };
         }
         public static FarmerLand ToEntity(this FarmerLand_model land)
@@ -103,6 +102,32 @@ namespace PiyatMandli
                 WindowId = land.WindowId,
                 IsActive = land.IsActive,
                 IsDeleted = land.IsDeleted,
+            };
+        }
+
+        public static WindowMaster ToEntity(this Window_model window)
+        {
+            return new WindowMaster
+            {
+                Id = window.Id,
+                WindowName = window.WindowName,
+                IsActive = window.IsActive,
+                IsDeleted = window.IsDeleted,
+                CreatedDate = window.DateCreated,
+                ModifiedDate = window.DateModified,
+            };
+        }
+
+        public static Window_model ToModel(this WindowMaster window)
+        {
+            return new Window_model
+            {
+                Id = window.Id,
+                WindowName = window.WindowName,
+                IsActive = window.IsActive,
+                IsDeleted = window.IsDeleted,
+                DateCreated = window.CreatedDate,
+                DateModified = window.ModifiedDate,
             };
         }
     }

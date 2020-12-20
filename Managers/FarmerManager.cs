@@ -9,69 +9,71 @@ namespace PiyatMandli
 {
     public class FarmerManager
     {
-        public ResponseModel<Farmer_model> GetAll()
+        public GenericRecordList<Farmer_model> GetAll(int? id, int startIndex = -1, int fetchRecords = -1, string searchString = "", bool? isActive = null, bool? isDeleted = false)
         {
-            ResponseModel<Farmer_model> model = new ResponseModel<Farmer_model>();
+            GenericRecordList<Farmer_model> model = new GenericRecordList<Farmer_model>();
             try
             {
-
-                var data = new Entities().GetAll_Farmers().Select(x => x.ToModel()).ToList();
-                if (data.Count > 0)
+                var data = new Entities().GetAll_Farmers().Where(x => x.IsDeleted == isDeleted);
+                if (isActive.HasValue)
                 {
-                    model.ResponseCode = ResponseCode.Success;
-                    model.Records = data;
+                    data = data.Where(x => x.IsActive == isActive);
+                }
+                if (id.HasValue)
+                {
+                    data = data.Where(x => x.Id == id);
+                }
+                model.TotalRecords = data.Count();
+                if (!string.IsNullOrEmpty(searchString))
+                {
+                    data = data.Where(x => x.Name.Contains(searchString) || x.FarmerCode.Contains(searchString) || x.ShareNo.Contains(searchString) || x.Village.Contains(searchString));
+                }
+                if (startIndex > -1 && fetchRecords > -1)
+                {
+                    model.RecordList = data.OrderBy(x => x.Name).Skip(startIndex).Take(fetchRecords).ToList().Select(x => x.ToModel()).ToList();
                 }
                 else
                 {
-                    model.ResponseCode = ResponseCode.NoData;
-                    model.ResponseMessage = Constants.NoDataMessage;
+                    model.RecordList = data.ToList().Select(x => x.ToModel()).ToList();
+                }
+                if (model.RecordList.Count != 0)
+                {
+                    model.ReturnCode = ResponseMessages.SuccessCode;
+                    model.ReturnMsg = ResponseMessages.SuccessMsg;
+                    model.ReturnValue = model.RecordList.Count.ToString();
+                }
+                else
+                {
+                    model.ReturnCode = ResponseMessages.NoDataCode;
+                    model.ReturnMsg = ResponseMessages.NoDataMsg;
+                    model.ReturnValue = string.Empty;
                 }
             }
             catch (Exception ex)
             {
-                string errorMessage = AppManager.LogException(ex);
-                model.ResponseCode = ResponseCode.Error;
-                model.Records = null;
-                model.Record = null;
-                model.ResponseMessage = Constants.NoDataMessage;
+                model.ReturnCode = ResponseMessages.ErrorCode;
+                model.ReturnMsg = ResponseMessages.ErrorMsg + ":" + ex.Message.ToString();
+                model.ReturnValue = string.Empty;
+                model.RecordList = null;
+                AppManager.LogException(ex);
             }
             return model;
         }
-        public ResponseModel<Farmer_model> Add(Farmer_model farmer)
+
+        public ResponseModel<Farmer_model> Save(Farmer_model farmer)
         {
             var response = new ResponseModel<Farmer_model>();
             try
             {
-                //var recordId = new Entities().AddEntity_Farmer(new Farmer
-                //{
-                //    FarmerCode = farmer.FarmerCode,
-                //    ShareNo = farmer.ShareNo,
-                //    Name = farmer.Name,
-                //    DateOfBirth = farmer.DateOfBirth,
-                //    DateOfBirthEng = farmer.DateOfBirthEng,
-                //    AddressLine1 = farmer.AddressLine1,
-                //    AddressLine2 = farmer.AddressLine2,
-                //    Village = farmer.Village,
-                //    City = farmer.City,
-                //    State = farmer.State,
-                //    Country = farmer.Country,
-                //    Pincode = farmer.Pincode,
-                //    PhoneNo1 = farmer.PhoneNo1,
-                //    PhoneNo2 = farmer.PhoneNo2,
-                //    MobileNo1 = farmer.MobileNo1,
-                //    MobileNo2 = farmer.MobileNo2,
-                //    DateOfRegistration = farmer.DateOfRegistration,
-                //    FarmerLands = farmer.Lands.Select(x => new FarmerLand
-                //    {
-                //        BlockNo = x.BlockNo,
-                //        SurveyNo = x.SurveyNo,
-                //        WindowId = x.WindowId,
-                //        LandName = x.LandName,
-                //        LandArea = x.LandArea,
-                //        LandAreaEng = x.LandArea.ToEnglish(),
-                //    }).ToList()
-                //});
-                var recordId = new Entities().AddEntity_Farmer(farmer.ToEntity());
+                var recordId = 0;
+                if (farmer.Id > 0)
+                {
+                    recordId = new Entities().UpdateEntity_Farmer(farmer.ToEntity());
+                }
+                else
+                {
+                    recordId = new Entities().AddEntity_Farmer(farmer.ToEntity());
+                }
                 response.RecordId = recordId;
                 response.ResponseCode = ResponseCode.Success;
             }
@@ -89,37 +91,6 @@ namespace PiyatMandli
             var response = new ResponseModel<Farmer_model>();
             try
             {
-                //var recordId = new Entities().UpdateEntity_Farmer(new Farmer
-                //{
-                //    Id = farmer.Id,
-                //    FarmerCode = farmer.FarmerCode,
-                //    ShareNo = farmer.ShareNo,
-                //    Name = farmer.Name,
-                //    DateOfBirth = farmer.DateOfBirth,
-                //    DateOfBirthEng = farmer.DateOfBirthEng,
-                //    AddressLine1 = farmer.AddressLine1,
-                //    AddressLine2 = farmer.AddressLine2,
-                //    Village = farmer.Village,
-                //    City = farmer.City,
-                //    State = farmer.State,
-                //    Country = farmer.Country,
-                //    Pincode = farmer.Pincode,
-                //    PhoneNo1 = farmer.PhoneNo1,
-                //    PhoneNo2 = farmer.PhoneNo2,
-                //    MobileNo1 = farmer.MobileNo1,
-                //    MobileNo2 = farmer.MobileNo2,
-                //    DateOfRegistration = farmer.DateOfRegistration,
-                //    FarmerLands = farmer.Lands.Select(x => new FarmerLand
-                //    {
-                //        Id = x.Id,
-                //        BlockNo = x.BlockNo,
-                //        SurveyNo = x.SurveyNo,
-                //        WindowId = x.WindowId,
-                //        LandName = x.LandName,
-                //        LandArea = x.LandArea,
-                //        LandAreaEng = x.LandArea.ToEnglish(),
-                //    }).ToList()
-                //});
                 var recordId = new Entities().UpdateEntity_Farmer(farmer.ToEntity());
                 response.RecordId = recordId;
                 response.ResponseCode = ResponseCode.Success;
@@ -133,25 +104,25 @@ namespace PiyatMandli
             return response;
         }
 
-        public ResponseModel<Farmer_model> Delete(int farmerId)
+        public GenericClass Delete(int farmerId)
         {
-            var response = new ResponseModel<Farmer_model>();
+            var response = new GenericClass();
             try
             {
                 if (new Entities().RemoveEntity_Farmer(farmerId))
                 {
-                    response.ResponseCode = ResponseCode.Success;
+                    response.ReturnCode = ResponseMessages.SuccessCode;
                 }
                 else
                 {
-                    response.ResponseCode = ResponseCode.NoData;
+                    response.ReturnCode = ResponseMessages.NoDataCode;
                 }
             }
             catch (Exception ex)
             {
                 var errorMessage = AppManager.LogException(ex);
-                response.ResponseMessage = ex.Message;
-                response.ResponseCode = ResponseCode.Error;
+                response.ReturnMsg = ex.Message;
+                response.ReturnCode = ResponseMessages.ErrorCode;
             }
             return response;
         }

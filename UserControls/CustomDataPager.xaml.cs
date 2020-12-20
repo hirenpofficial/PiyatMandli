@@ -11,7 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
+using PiyatMandli;
 namespace Controls
 {
     /// <summary>
@@ -41,7 +41,7 @@ namespace Controls
             Int32 EndRecord = (CurrentIndex * FetchRecords);
             if (TotalCount == 0)
             {
-                TXTCountMessage.Text = "No data found.";
+                TXTCountMessage.Text = "માહિતી ઉપલબ્ધ નથી.";
                 return;
             }
             else if (EndRecord > TotalCount)
@@ -50,18 +50,20 @@ namespace Controls
             }
             if (CurrentIndex == 1)
             {
-                TXTCountMessage.Text = "Showing " + CurrentIndex.ToString() + " to " + EndRecord.ToString() + " out of " + TotalCount.ToString() + " Records.";
+                //TXTCountMessage.Text = "Showing " + CurrentIndex.ToString() + " to " + EndRecord.ToString() + " out of " + TotalCount.ToString() + " Records.";
+                TXTCountMessage.Text = $"{TotalCount.ToString().ToGujarati()} રેકોર્ડમાંથી {CurrentIndex.ToString().ToGujarati()} થી {EndRecord.ToString().ToGujarati()} રેકોર્ડ બતાવી રહ્યું છે";
             }
             else
             {
-                TXTCountMessage.Text = "Showing " + (CurrentIndex * FetchRecords + 1 - FetchRecords).ToString() + " to " + EndRecord.ToString() + "  out of " + TotalCount.ToString() + " Records.";
+                //TXTCountMessage.Text = "Showing " + (CurrentIndex * FetchRecords + 1 - FetchRecords).ToString() + " to " + EndRecord.ToString() + "  out of " + TotalCount.ToString() + " Records.";
+                TXTCountMessage.Text = $"{TotalCount.ToString().ToGujarati()} રેકોર્ડમાંથી {(CurrentIndex * FetchRecords + 1 - FetchRecords).ToString().ToGujarati()} થી {EndRecord.ToString().ToGujarati()} રેકોર્ડ બતાવી રહ્યું છે";
             }
             DPPageButtons.Children.Clear();
             TotalCount = Convert.ToInt32(Math.Ceiling(Convert.ToDecimal(TotalCount) / Convert.ToDecimal(FetchRecords)));
             for (Int32 i = 0; i < TotalCount; i++)
             {
                 Button B = new Button();
-                B.Content = (i + 1).ToString();
+                B.Content = (i + 1).ToString().ToGujarati();
                 B.Name = "BTN_" + (i + 1).ToString();
                 B.Width = 25;
                 B.Height = 25;
@@ -73,7 +75,7 @@ namespace Controls
 
         void Paging_Click(object sender, RoutedEventArgs e)
         {
-            CPage = Convert.ToInt32(((Button)e.Source).Content);
+            CPage = Convert.ToInt32(((Button)e.Source).Content.ToString().ToEnglish());
         }
     }
 }
