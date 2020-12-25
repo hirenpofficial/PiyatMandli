@@ -173,3 +173,7 @@ C:\Users\HireN\Desktop\PiyatMandli\bin\Debug\FontAwesome5.xml
 C:\Users\HireN\Desktop\PiyatMandli\bin\Debug\FontAwesome5.Net.xml
 C:\Users\HireN\Desktop\PiyatMandli\obj\Debug\Forms\ManageWindows.g.cs
 C:\Users\HireN\Desktop\PiyatMandli\obj\Debug\Forms\ManageWindows.baml
+C:\Users\HireN\Desktop\PiyatMandli\obj\Debug\Forms\ManageYears.g.cs
+C:\Users\HireN\Desktop\PiyatMandli\obj\Debug\Forms\ManageYears.baml
+C:\Users\HireN\Desktop\PiyatMandli\obj\Debug\Forms\ManageFarmerLands.g.cs
+C:\Users\HireN\Desktop\PiyatMandli\obj\Debug\Forms\ManageFarmerLands.baml

@@ -40,10 +40,24 @@ namespace PiyatMandli
                 {
                     TXTDatePicker.Text = _selectedDate.Value.ToShortDateString().ToGujarati();
                 }
+                if (value == null)
+                {
+                    currentMonth = DateTime.Now.Month;
+                    currentYear = DateTime.Now.Year;
+                    Generate();
+                }
             }
         }
         public UCDatePicker()
         {
+            days = new List<string>();
+            days.Add("Monday");
+            days.Add("Tuesday");
+            days.Add("Wednesday");
+            days.Add("Thursday");
+            days.Add("Friday");
+            days.Add("Saturday");
+            days.Add("Sunday");
             InitializeComponent();
         }
 
@@ -57,15 +71,7 @@ namespace PiyatMandli
             {
                 SelectedDate = SelectedDate;
             }
-            days = new List<string>();
-            days.Add("Monday");
-            days.Add("Tuesday");
-            days.Add("Wednesday");
-            days.Add("Thursday");
-            days.Add("Friday");
-            days.Add("Saturday");
-            days.Add("Sunday");
-
+           
             if (SelectedDate.HasValue)
             {
                 currentMonth = SelectedDate.Value.Month;

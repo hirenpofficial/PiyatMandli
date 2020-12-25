@@ -94,7 +94,7 @@
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
-                                    <Button Style="{DynamicResource MetroSquareButtonStyle}" x:Name="BTNSelect" Height="25" Width="25" HorizontalAlignment="Right" Foreground="#FF300000" ToolTip="Select item" BorderBrush="{x:Null}">
+                                    <Button Style="{DynamicResource MetroSquareButtonStyle}" x:Name="BTNSelect" Height="25" Width="25" HorizontalAlignment="Right" Foreground="#FF300000" ToolTip="Select item" BorderBrush="{x:Null}" Click="BTNSelect_Click">
                                         <fa:FontAwesome Icon="Solid_Tractor" FontSize="14"></fa:FontAwesome>
                                         <!--<Rectangle x:Name="imgSelect" Width="15" Height="15" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
                                             <Rectangle.OpacityMask>

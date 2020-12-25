@@ -130,5 +130,37 @@ namespace PiyatMandli
                 DateModified = window.ModifiedDate,
             };
         }
+
+        public static YearMaster ToEntity(this Year_model model)
+        {
+            return new YearMaster
+            {
+                Id = model.Id,
+                Year = model.Year,
+                Rate = model.Rate,
+                ClosingDate = model.ClosingDate,
+                StartingDate = model.StartingDate,
+                IsActive = model.IsActive,
+                IsDeleted = model.IsDeleted,
+                CreatedDate = model.DateCreated,
+                ModifiedDate = model.DateModified,
+            };
+        }
+
+        public static Year_model ToModel(this YearMaster entity)
+        {
+            return new Year_model
+            {
+                Id = entity.Id,
+                Year = entity.Year,
+                Rate = entity.Rate,
+                ClosingDate = entity.ClosingDate,
+                StartingDate = entity.StartingDate,
+                IsActive = entity.IsActive,
+                IsDeleted = entity.IsDeleted,
+                DateCreated = entity.CreatedDate,
+                DateModified = entity.ModifiedDate,
+            };
+        }
     }
 }

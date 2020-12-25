@@ -27,6 +27,12 @@
                         <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">બારીની યાદી</TextBlock>
                     </StackPanel>
                 </Button>
+                <Button Name="BTNManageYears" Style="{StaticResource LeftMenuButton}" Click="BTNManageYears_Click">
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>
+                        <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">વર્ષની યાદી</TextBlock>
+                    </StackPanel>
+                </Button>
                 <Button Name="BTNManageFarmers" Style="{StaticResource LeftMenuButton}" Click="BTNManageFarmers_Click">
                     <StackPanel Orientation="Horizontal" Width="180">
                         <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>

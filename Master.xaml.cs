@@ -154,5 +154,11 @@ namespace PiyatMandli
             Uri uri = new Uri("/Forms/ManageWindows.xaml", UriKind.Relative);
             _mainFrame.Navigate(uri);
         }
+
+        private void BTNManageYears_Click(object sender, RoutedEventArgs e)
+        {
+            Uri uri = new Uri("/Forms/ManageYears.xaml", UriKind.Relative);
+            _mainFrame.Navigate(uri);
+        }
     }
 }

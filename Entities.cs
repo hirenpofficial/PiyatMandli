@@ -165,5 +165,95 @@ namespace PiyatMandli
         }
 
         #endregion Windows
+
+        #region Year
+
+        public IQueryable<YearMaster> GetAll_Years()
+        {
+            var db = GetDataContext();
+            return db.YearMasters;
+        }
+
+        public int AddEntity_Year(YearMaster entity)
+        {
+            var db = GetDataContext();
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            entity.IsActive = true;
+            entity.IsDeleted = false;
+            db.YearMasters.Add(entity);
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public int UpdateEntity_Year(YearMaster model)
+        {
+            var db = GetDataContext();
+            var entity = db.YearMasters.FirstOrDefault(x => x.Id == model.Id);
+            entity.Year= model.Year;
+            entity.Rate = model.Rate;
+            entity.ClosingDate = model.ClosingDate;
+            entity.StartingDate = model.StartingDate;
+            entity.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public bool RemoveEntity_Year(int yearId)
+        {
+            var db = GetDataContext();
+            var entity = db.YearMasters.FirstOrDefault(x => x.Id == yearId);
+            entity.IsDeleted = true;
+            entity.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return true;
+        }
+
+        #endregion Year
+
+        #region  Farmer Land
+
+        public IQueryable<FarmerLand> GetAll_FarmerLands()
+        {
+            var db = GetDataContext();
+            return db.FarmerLands;
+        }
+        public int AddEntity_FarmerLand(FarmerLand entity)
+        {
+            var db = GetDataContext();
+            entity.IsActive = true;
+            entity.IsDeleted = false;
+            entity.CreatedDate = DateTime.Now;
+            entity.ModifiedDate = DateTime.Now;
+            db.FarmerLands.Add(entity);
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public int UpdateEntity_FarmerLand(FarmerLand model)
+        {
+            var db = GetDataContext();
+            var entity = db.FarmerLands.FirstOrDefault(x => x.Id == model.Id);
+            entity.WindowId = model.WindowId;
+            entity.BlockNo = model.BlockNo;
+            entity.SurveyNo = model.SurveyNo;
+            entity.LandName = model.LandName;
+            entity.LandArea = model.LandArea;
+            entity.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public bool RemoveEntity_FarmerLand(int id)
+        {
+            var db = GetDataContext();
+            var entity = db.FarmerLands.FirstOrDefault(x => x.Id == id);
+            entity.IsDeleted = true;
+            entity.ModifiedDate = DateTime.Now;
+            db.SaveChanges();
+            return true;
+        }
+
+        #endregion Farmer Land
     }
 }

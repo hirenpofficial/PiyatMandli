@@ -113,14 +113,22 @@
       <DependentUpon>PiyatMandliDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities.cs" />
+    <Compile Include="Forms\ManageFarmerLands.xaml.cs">
+      <DependentUpon>ManageFarmerLands.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Forms\ManageFarmers.xaml.cs">
       <DependentUpon>ManageFarmers.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\ManageYears.xaml.cs">
+      <DependentUpon>ManageYears.xaml</DependentUpon>
     </Compile>
     <Compile Include="Forms\ManageWindows.xaml.cs">
       <DependentUpon>ManageWindows.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Managers\FarmerLandManager.cs" />
     <Compile Include="Managers\FarmerManager.cs" />
     <Compile Include="Managers\Mapper.cs" />
+    <Compile Include="Managers\YearManager.cs" />
     <Compile Include="Managers\WindowManager.cs" />
     <Compile Include="Master.xaml.cs">
       <DependentUpon>Master.xaml</DependentUpon>
@@ -133,6 +141,7 @@
     <Compile Include="Models\ResponseMessages.cs" />
     <Compile Include="Models\ResponseModel.cs" />
     <Compile Include="Models\Window_model.cs" />
+    <Compile Include="Models\Year_model.cs" />
     <Compile Include="UCDatePicker.xaml.cs">
       <DependentUpon>UCDatePicker.xaml</DependentUpon>
     </Compile>
@@ -143,9 +152,17 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Forms\ManageFarmerLands.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Forms\ManageFarmers.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Forms\ManageYears.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Forms\ManageWindows.xaml">
       <SubType>Designer</SubType>

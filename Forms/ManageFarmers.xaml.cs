@@ -98,7 +98,7 @@ namespace PiyatMandli.Forms
             if (record != null)
             {
                 var metroWindow = (Application.Current.MainWindow as MetroWindow);
-                if(await metroWindow.ShowMessageAsync(AppManager.Constants.ApplicatioName,$"શું તમે \"{record.Name}\"ની માહિતી કાઢવા માંગો છો?", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
+                if (await metroWindow.ShowMessageAsync(AppManager.Constants.ApplicatioName, $"શું તમે \"{record.Name}\"ની માહિતી કાઢવા માંગો છો?", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
                 {
                     if (manager.Delete(record.Id).ReturnCode == ResponseMessages.SuccessCode)
                     {
@@ -117,10 +117,20 @@ namespace PiyatMandli.Forms
             var record = (Farmer_model)LSTRecord.SelectedItem;
             if (record != null)
             {
-                if(new AddEditFarmer(record.Id).ShowDialog() == true)
+                if (new AddEditFarmer(record.Id).ShowDialog() == true)
                 {
                     FillList();
                 }
+            }
+        }
+
+        private void BTNSelect_Click(object sender, RoutedEventArgs e)
+        {
+            var record = (Farmer_model)LSTRecord.SelectedItem;
+            if (record != null)
+            {
+                new ManageFarmerLands(record.Id).ShowDialog();
+                FillList();
             }
         }
     }
