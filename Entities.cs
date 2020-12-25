@@ -67,6 +67,7 @@ namespace PiyatMandli
             entity.DateOfBirthEng = model.DateOfBirthEng;
             entity.AddressLine1 = model.AddressLine1;
             entity.AddressLine2 = model.AddressLine2;
+            entity.Village = model.Village;
             entity.City = model.City;
             entity.State = model.State;
             entity.Country = model.Country;
@@ -190,7 +191,7 @@ namespace PiyatMandli
         {
             var db = GetDataContext();
             var entity = db.YearMasters.FirstOrDefault(x => x.Id == model.Id);
-            entity.Year= model.Year;
+            entity.Year = model.Year;
             entity.Rate = model.Rate;
             entity.ClosingDate = model.ClosingDate;
             entity.StartingDate = model.StartingDate;
@@ -255,5 +256,57 @@ namespace PiyatMandli
         }
 
         #endregion Farmer Land
+
+        #region Farmers
+
+        public IQueryable<Transaction> GetAll_Transactions()
+        {
+            var db = GetDataContext();
+            return db.Transactions.Include(x => x.Farmer).Include(x => x.Garotdar).Include(x => x.FarmerLand.WindowMaster).Include(x => x.YearMaster);
+        }
+
+        public int AddEntity_Transaction(Transaction entity)
+        {
+            var db = GetDataContext();
+            entity.DateCreated = DateTime.Now;
+            entity.DateModified = DateTime.Now;
+            entity.IsActive = true;
+            entity.IsDeleted = false;
+            db.Transactions.Add(entity);
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public int UpdateEntity_Transaction(Transaction model)
+        {
+            var db = GetDataContext();
+            var entity = db.Transactions.FirstOrDefault(x => x.Id == model.Id);
+            entity.FarmerId = model.FarmerId;
+            entity.GarotdarId = model.GarotdarId;
+            entity.LandId = model.LandId;
+            entity.Rate = model.Rate;
+            entity.RateEng = model.RateEng;
+            entity.LandArea = model.LandArea;
+            entity.LandAreaEng = model.LandAreaEng;
+            entity.Crop = model.Crop;
+            entity.Date = model.Date;
+            entity.DateEng = model.DateEng;
+            entity.YearId = model.YearId;
+            entity.DateModified = DateTime.Now;
+            db.SaveChanges();
+            return entity.Id;
+        }
+
+        public bool RemoveEntity_Transaction(int id)
+        {
+            var db = GetDataContext();
+            var entity = db.Transactions.FirstOrDefault(x => x.Id == id);
+            entity.IsDeleted = true;
+            entity.DateModified = DateTime.Now;
+            db.SaveChanges();
+            return true;
+        }
+
+        #endregion Farmers
     }
 }

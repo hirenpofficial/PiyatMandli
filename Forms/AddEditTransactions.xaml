@@ -1,0 +1,142 @@
+﻿<Controls:MetroWindow x:Class="PiyatMandli.Forms.AddEditTransactions"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PiyatMandli.Forms"
+        xmlns:PiyatMandli="clr-namespace:PiyatMandli"
+        xmlns:fa="http://schemas.fontawesome.com/icons/" 
+        mc:Ignorable="d" ShowInTaskbar="False"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        Title="AddEditTransactions" 
+        ShowTitleBar="False" ShowCloseButton="False" ShowMinButton="False" ShowMaxRestoreButton="False"
+        Height="650" Width="800" Loaded="MetroWindow_Loaded" FontSize="16" WindowStartupLocation="CenterScreen" PreviewKeyUp="MetroWindow_PreviewKeyUp" PreviewLostKeyboardFocus="MetroWindow_PreviewLostKeyboardFocus" PreviewGotKeyboardFocus="MetroWindow_PreviewGotKeyboardFocus">
+    <DockPanel VerticalAlignment="Top" Name="DPTop">
+        <DockPanel x:Name="DPHeader" Style="{StaticResource PageTitleBlock}" DockPanel.Dock="Top">
+            <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>
+            <Label x:Name="LBLTitle" Style="{StaticResource PageTitle}" FontSize="20">નવુ વ્યવહાર ઉમેરો</Label>
+            <Button Style="{DynamicResource MetroSquareButtonStyle}" x:Name="BTNClose" Height="40" Width="40" HorizontalAlignment="Right" Foreground="White" Background="#FF300000" Click="BTNClose_Click" IsTabStop="False">
+                <Rectangle Width="20" Height="20" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}">
+                    <Rectangle.OpacityMask>
+                        <VisualBrush Stretch="Fill" Visual="{DynamicResource appbar_close}" />
+                    </Rectangle.OpacityMask>
+                </Rectangle>
+            </Button>
+        </DockPanel>
+        <DockPanel>
+            <Grid Margin="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                    <ColumnDefinition></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                    <RowDefinition></RowDefinition>
+                </Grid.RowDefinitions>
+                <StackPanel Orientation="Vertical" Margin="10" Grid.ColumnSpan="3">
+                    <TextBlock>સભાસદ કોડ :</TextBlock>
+                    <PiyatMandli:UCFarmerSelection />
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3">
+                    <TextBlock>ખેડૂતનું નામ :</TextBlock>
+                    <TextBox x:Name="TXTName"  FontSize="16"
+                             Controls:TextBoxHelper.Watermark="ખેડૂતનું નામ"
+                             Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2" Tag="required"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2">
+                    <TextBlock>સરનામું :</TextBlock>
+                    <TextBox x:Name="TXTAddress" FontSize="16"
+                             Controls:TextBoxHelper.Watermark="સરનામું"
+                             Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10" Grid.Column="0" Grid.Row="3">
+                    <TextBlock>ગામ :</TextBlock>
+                    <TextBox x:Name="TXTVillage" FontSize="16"
+                             Controls:TextBoxHelper.Watermark="ગામનું નામ"
+                             Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2" Tag="required"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10" Grid.Column="1" Grid.Row="3">
+                    <TextBlock>તાલુકો :</TextBlock>
+                    <TextBox x:Name="TXTCity" FontSize="16"
+                             Controls:TextBoxHelper.Watermark="તાલુકાનું નામ"
+                             Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Vertical" Margin="10" Grid.Column="2" Grid.Row="3">
+                    <TextBlock>પિન કોડ :</TextBlock>
+                    <TextBox x:Name="TXTZip" FontSize="16"
+                             Controls:TextBoxHelper.Watermark="પિન કોડ"
+                             Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="10" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                            <TextBlock>ફોન નં. ૧ :</TextBlock>
+                            <TextBox x:Name="TXTPhone1" FontSize="16"
+                                Controls:TextBoxHelper.Watermark="ફોન નં. ૧"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock>ફોન નં. ૨ :</TextBlock>
+                            <TextBox x:Name="TXTPhone2" FontSize="16"
+                                Controls:TextBoxHelper.Watermark="ફોન નં. ૨"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="10" Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Margin="0 0 10 0">
+                            <TextBlock>મોબાઇલ નં. ૧ :</TextBlock>
+                            <TextBox x:Name="TXTMobile1" FontSize="16"
+                                Controls:TextBoxHelper.Watermark="મોબાઇલ નં. ૧"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2" Tag="required"></TextBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1">
+                            <TextBlock>મોબાઇલ નં. ૨ :</TextBlock>
+                            <TextBox x:Name="TXTMobile2" FontSize="16"
+                                Controls:TextBoxHelper.Watermark="મોબાઇલ નં. ૨"
+                                Controls:TextBoxHelper.SelectAllOnFocus="True" BorderBrush="#FF300000" BorderThickness="2"></TextBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+                <StackPanel Margin="10" Grid.Row="6" Grid.Column="0">
+                    <TextBlock>જન્મ તારીખ :</TextBlock>
+                    <PiyatMandli:UCDatePicker x:Name="DTPDateOfBirth"></PiyatMandli:UCDatePicker>
+                </StackPanel>
+                <StackPanel Margin="10" Grid.Row="6" Grid.Column="1">
+                    <TextBlock>જોડાણની તારીખ :</TextBlock>
+                    <PiyatMandli:UCDatePicker x:Name="DTPDateOfRegistration"></PiyatMandli:UCDatePicker>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Grid.Row="7" Grid.ColumnSpan="3" HorizontalAlignment="Center">
+                    <Button x:Name="BTNSave" ToolTip="માહિતીનો સંગ્રહ કરો" TabIndex="2" Margin="0 0 10 0" Click="BTNSave_Click" BorderBrush="#FF300000" BorderThickness="2" IsDefault="True">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Solid_Save" Foreground="#FF300000" Height="15" />
+                            <TextBlock Text="સંગ્રહ" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                    <Button x:Name="BTNCancel" ToolTip="બંધ કરો" TabIndex="2" Margin="0 0 10 0" Click="BTNClose_Click" BorderBrush="#FF300000" BorderThickness="2">
+                        <StackPanel Orientation="Horizontal">
+                            <fa:ImageAwesome Icon="Regular_WindowClose" Foreground="#FF300000" Height="15" />
+                            <TextBlock Text="બંધ" FontSize="16" Margin="10 0 0 0"></TextBlock>
+                        </StackPanel>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+    </DockPanel>
+</Controls:MetroWindow>

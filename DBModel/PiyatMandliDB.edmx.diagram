@@ -12,6 +12,11 @@
         <AssociationConnector Association="PiyatMandliModel.FK_FarmerLands_Farmers" ManuallyRouted="false" />
         <AssociationConnector Association="PiyatMandliModel.FK_FarmerLands_WindowMaster" ManuallyRouted="false" />
         <EntityTypeShape EntityType="PiyatMandliModel.YearMaster" Width="1.5" PointX="0.75" PointY="5.75" />
+        <EntityTypeShape EntityType="PiyatMandliModel.Transaction" Width="1.5" PointX="5.25" PointY="6.125" />
+        <AssociationConnector Association="PiyatMandliModel.FK_Transactions_FarmerLands" />
+        <AssociationConnector Association="PiyatMandliModel.FK_Transactions_Farmers" />
+        <AssociationConnector Association="PiyatMandliModel.FK_Transactions_Farmers1" />
+        <AssociationConnector Association="PiyatMandliModel.FK_Transactions_YearMaster" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

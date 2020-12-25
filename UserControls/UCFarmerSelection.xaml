@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="PiyatMandli.UCFarmerSelection"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:PiyatMandli"
+             xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+             mc:Ignorable="d" d:DesignWidth="800" Loaded="UserControl_Loaded">
+    <UserControl.Resources>
+        <Style x:Key="groupheaderstyle" TargetType="{x:Type GroupItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                        <Expander x:Name="exp" IsExpanded="True" Background="White" Foreground="Black">
+                            <Expander.Header>
+                                <TextBlock FontWeight="DemiBold" FontSize="16" Text="{Binding Name}" />
+                            </Expander.Header>
+                            <ItemsPresenter />
+                        </Expander>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <TextBox x:Name="TXTFarmer" PreviewMouseLeftButtonDown="TXTFarmer_PreviewMouseLeftButtonDown" LostFocus="TXTFarmer_LostFocus" GotFocus="TXTFarmer_GotFocus" FontSize="16" BorderBrush="#FF300000" BorderThickness="2" Width="750" HorizontalAlignment="Left" 
+                 Controls:TextBoxHelper.Watermark="ખેડૂત પસંદ કરો"
+                 KeyDown="TXTFarmer_KeyDown" TextChanged="TXTFarmer_TextChanged"></TextBox>
+
+        <Popup x:Name="PPFarmer" PlacementTarget="{Binding ElementName=TXTFarmer}" AllowsTransparency="True" PopupAnimation="Slide"  >
+            <Border BorderBrush="White" BorderThickness="3,3,0,0">
+                <Border BorderBrush="Black" BorderThickness="1,1,3,3">
+                    <DataGrid x:Name="LSTRecords" Grid.Row="0" CanUserSortColumns="False" CanUserAddRows="False" CanUserDeleteRows="False"
+                  RenderOptions.ClearTypeHint="Enabled" 
+                  TextOptions.TextFormattingMode="Display"
+                  SelectionUnit="FullRow" IsSynchronizedWithCurrentItem="False"
+                     ColumnHeaderStyle="{StaticResource DataGridHeaderFont}" 
+                  AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" Width="750" SelectionChanged="LSTRecords_SelectionChanged">
+                        <DataGrid.GroupStyle>
+                            <GroupStyle ContainerStyle="{StaticResource groupheaderstyle}">
+                                <GroupStyle.Panel>
+                                    <ItemsPanelTemplate>
+                                        <DataGridRowsPresenter />
+                                    </ItemsPanelTemplate>
+                                </GroupStyle.Panel>
+                            </GroupStyle>
+                        </DataGrid.GroupStyle>
+                        <DataGrid.Columns>
+                            <DataGridCheckBoxColumn ElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        EditingElementStyle="{DynamicResource MetroDataGridCheckBox}"
+                                        Header="પસંદ"
+                                        Binding="{Binding RelativeSource={RelativeSource AncestorType=DataGridRow}, Path=IsSelected, Mode=OneWay}" >
+                            </DataGridCheckBoxColumn>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="ID" Visibility="Hidden" Width="0" />
+                            <DataGridTextColumn Binding="{Binding FarmerCode}" Header="સભાસદ કોડ" Width="*" />
+                            <DataGridTextColumn Binding="{Binding ShareNo}" Header="શેર નં." Width="*" />
+                            <DataGridTextColumn Binding="{Binding Name}" Header="નામ" Width="*" />
+                            <DataGridTextColumn Binding="{Binding Village}" Header="ગામ" Width="*" />
+                            <DataGridTextColumn Binding="{Binding PhoneNo1}" Header="ફોન નં." Width="*" />
+                            <DataGridTextColumn Binding="{Binding MobileNo1}" Header="મોબાઇલ નં." Width="*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Border>
+            </Border>
+        </Popup>
+    </Grid>
+
+</UserControl>

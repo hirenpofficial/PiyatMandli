@@ -18,16 +18,18 @@ using System.Windows.Shapes;
 namespace PiyatMandli.Forms
 {
     /// <summary>
-    /// Interaction logic for ManageFarmers.xaml
+    /// Interaction logic for ManageTransactions.xaml
     /// </summary>
-    public partial class ManageFarmers : Page
+    public partial class ManageTransactions : Page
     {
-        FarmerManager manager;
-        public ManageFarmers()
+        TransactionManager manager;
+        public ManageTransactions()
         {
-            manager = new FarmerManager();
+            manager = new TransactionManager();
             InitializeComponent();
         }
+
+        
 
         private void Page_Loaded(object sender, RoutedEventArgs e)
         {
@@ -37,7 +39,7 @@ namespace PiyatMandli.Forms
             }
             CBPageCount.SelectedIndex = 1;
             this.Height = SystemParameters.PrimaryScreenHeight;
-            LSTRecords.Height = this.Height - 300;
+            LSTRecord.Height = this.Height - 300;
             FillList();
         }
 
@@ -55,18 +57,11 @@ namespace PiyatMandli.Forms
             {
                 FARefresh.Visibility = Visibility.Visible;
                 startIndex = (startIndex - 1) * Convert.ToInt32(((System.Windows.Controls.ContentControl)(CBPageCount.SelectedItem)).Content.ToString().ToEnglish());
-                LSTRecords.ItemsSource = null;
-                GenericRecordList<Farmer_model> GRL = manager.GetAll(null, startIndex, fetchRecords, searchString, isActive, isDelete);
-
-                var records = GRL.RecordList.GroupBy(x => x.Village).Select(x => new GroupFarmer_model
-                {
-                    GroupName = x.Key,
-                    Farmers = x.ToList()
-                }).ToList();
-                ListCollectionView collection = new ListCollectionView(GRL.RecordList);
-                collection.GroupDescriptions.Add(new PropertyGroupDescription("Village"));
-                LSTRecords.ItemsSource = collection;
+                LSTRecord.ItemsSource = null;
+                var GRL = manager.GetAll(null, startIndex, fetchRecords, searchString, isActive, isDelete);
+                LSTRecord.ItemsSource = GRL.RecordList;
                 FARefresh.Visibility = Visibility.Hidden;
+                //CHKAll.IsChecked = false;
 
                 CustomPager.ShowPager(Convert.ToInt32(GRL.TotalRecords), CustomPager.CurrentPage, Convert.ToInt32(((System.Windows.Controls.ContentControl)(CBPageCount.SelectedItem)).Content.ToString().ToEnglish()));
             }
@@ -93,7 +88,7 @@ namespace PiyatMandli.Forms
 
         private void BTNAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (new AddEditFarmer().ShowDialog() == true)
+            if (new AddEditTransactions().ShowDialog() == true)
             {
                 FillList();
             }
@@ -101,7 +96,7 @@ namespace PiyatMandli.Forms
 
         private async void BTNDelete_Click(object sender, RoutedEventArgs e)
         {
-            var record = (Farmer_model)LSTRecords.SelectedItem;
+            var record = (Farmer_model)LSTRecord.SelectedItem;
             if (record != null)
             {
                 var metroWindow = (Application.Current.MainWindow as MetroWindow);
@@ -121,7 +116,7 @@ namespace PiyatMandli.Forms
 
         private void BTNEdit_Click(object sender, RoutedEventArgs e)
         {
-            var record = (Farmer_model)LSTRecords.SelectedItem;
+            var record = (Farmer_model)LSTRecord.SelectedItem;
             if (record != null)
             {
                 if (new AddEditFarmer(record.Id).ShowDialog() == true)
@@ -133,7 +128,7 @@ namespace PiyatMandli.Forms
 
         private void BTNSelect_Click(object sender, RoutedEventArgs e)
         {
-            var record = (Farmer_model)LSTRecords.SelectedItem;
+            var record = (Farmer_model)LSTRecord.SelectedItem;
             if (record != null)
             {
                 new ManageFarmerLands(record.Id).ShowDialog();

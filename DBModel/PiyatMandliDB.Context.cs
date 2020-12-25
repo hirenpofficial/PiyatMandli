@@ -30,5 +30,6 @@ namespace PiyatMandli.DBModel
         public virtual DbSet<Farmer> Farmers { get; set; }
         public virtual DbSet<WindowMaster> WindowMasters { get; set; }
         public virtual DbSet<YearMaster> YearMasters { get; set; }
+        public virtual DbSet<Transaction> Transactions { get; set; }
     }
 }

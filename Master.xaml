@@ -39,6 +39,12 @@
                         <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">ખેડૂતોની યાદી</TextBlock>
                     </StackPanel>
                 </Button>
+                <Button Name="BTNManageTransactions" Style="{StaticResource LeftMenuButton}" Click="BTNManageTransactions_Click">
+                    <StackPanel Orientation="Horizontal" Width="180">
+                        <Image Source="/Images/farmer.png" Width="26" Height="26" Margin="5,0,10,0"/>
+                        <TextBlock Style="{StaticResource LeftMenuLabel}" FontSize="20">વ્યવહારોની યાદી</TextBlock>
+                    </StackPanel>
+                </Button>
                 <Button Name="BTNLogout"  Style="{StaticResource LeftMenuButton}">
                     <StackPanel Orientation="Horizontal" Width="180">
                         <Image Source="/Images/button-power.png" Width="26" Height="26" Margin="5,0,10,0"/>

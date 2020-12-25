@@ -84,5 +84,27 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Transactions">
+      <EntityTypeMapping TypeName="PiyatMandliModel.Transaction">
+        <MappingFragment StoreEntitySet="Transactions">
+          <ScalarProperty Name="DateEng" ColumnName="DateEng" />
+          <ScalarProperty Name="LandAreaEng" ColumnName="LandAreaEng" />
+          <ScalarProperty Name="RateEng" ColumnName="RateEng" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="YearId" ColumnName="YearId" />
+          <ScalarProperty Name="Crop" ColumnName="Crop" />
+          <ScalarProperty Name="Rate" ColumnName="Rate" />
+          <ScalarProperty Name="LandArea" ColumnName="LandArea" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="GarotdarId" ColumnName="GarotdarId" />
+          <ScalarProperty Name="LandId" ColumnName="LandId" />
+          <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

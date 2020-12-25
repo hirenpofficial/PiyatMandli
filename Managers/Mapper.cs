@@ -35,8 +35,8 @@ namespace PiyatMandli
                 IsDeleted = farmer.IsDeleted,
                 DateCreated = farmer.DateCreated,
                 DateModified = farmer.DateModified,
-                TotalLands = farmer.FarmerLands.Count().ToString().ToGujarati(),
-                Lands = farmer.FarmerLands.Select(y => y.ToModel()).ToList()
+                TotalLands = farmer.FarmerLands.Count(x => !x.IsDeleted).ToString().ToGujarati(),
+                Lands = farmer.FarmerLands.Where(x => !x.IsDeleted).Select(y => y.ToModel()).ToList()
             };
         }
         public static FarmerLand_model ToModel(this FarmerLand land)
@@ -160,6 +160,63 @@ namespace PiyatMandli
                 IsDeleted = entity.IsDeleted,
                 DateCreated = entity.CreatedDate,
                 DateModified = entity.ModifiedDate,
+            };
+        }
+
+        public static Transaction_model ToModel(this Transaction entity)
+        {
+            var model = new Transaction_model
+            {
+                Id = entity.Id,
+                FarmerId = entity.FarmerId,
+                GarotdarId = entity.GarotdarId,
+                LandId = entity.LandId,
+                LandArea = entity.LandArea,
+                LandAreaEng = entity.LandAreaEng,
+                Crop = entity.Crop,
+                Date = entity.Date,
+                DateEng = entity.DateEng,
+                Rate = entity.Rate,
+                RateEng = entity.RateEng,
+                WindowName = entity.FarmerLand.WindowMaster.WindowName,
+                YearId = entity.YearId,
+                YearDetail = entity.YearMaster.ToModel(),
+                Farmer = entity.Farmer.ToModel(),
+                Garotdar = entity.Garotdar.ToModel(),
+                Land = entity.FarmerLand.ToModel(),
+                IsActive = entity.IsActive,
+                IsDeleted = entity.IsDeleted,
+                DateCreated = entity.DateCreated,
+                DateModified = entity.DateModified,
+            };
+            model.LocalFundEng = HelperMethods.CalculateLocalFundAmount(model.RateEng, model.LandAreaEng);
+            model.LocalFund = model.LocalFundEng.ToString().ToGujarati();
+            model.GrossEng = HelperMethods.CalculateGrossAmount(model.RateEng, model.LandAreaEng);
+            model.Gross = model.GrossEng.ToString().ToGujarati();
+            model.TotalEng = model.LocalFundEng + model.GrossEng;
+            model.Total = model.TotalEng.ToString().ToGujarati();
+            return model;
+        }
+        public static Transaction ToEntity(this Transaction_model model)
+        {
+            return new Transaction
+            {
+                Id = model.Id,
+                Crop = model.Crop,
+                Date = model.Date,
+                FarmerId = model.FarmerId,
+                GarotdarId = model.GarotdarId,
+                LandArea = model.LandArea,
+                Rate = model.Rate,
+                LandId = model.LandId,
+                YearId = model.YearId,
+                IsActive = model.IsActive,
+                IsDeleted = model.IsDeleted,
+                DateCreated = model.DateCreated,
+                DateModified = model.DateModified,
+                DateEng = Convert.ToDateTime(model.Date.ToEnglish()),
+                LandAreaEng = Convert.ToDecimal(model.LandArea.ToEnglish()),
+                RateEng = Convert.ToDecimal(model.Rate.ToEnglish())
             };
         }
     }

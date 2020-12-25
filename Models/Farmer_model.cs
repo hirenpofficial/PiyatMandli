@@ -29,4 +29,10 @@ namespace PiyatMandli
         public string TotalLands { get; set; }
         public List<FarmerLand_model> Lands { get; set; }
     }
+
+    public class GroupFarmer_model
+    {
+        public string GroupName { get; set; }
+        public List<Farmer_model> Farmers { get; set; }
+    }
 }

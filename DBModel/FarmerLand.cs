@@ -14,6 +14,12 @@ namespace PiyatMandli.DBModel
     
     public partial class FarmerLand
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public FarmerLand()
+        {
+            this.Transactions = new HashSet<Transaction>();
+        }
+    
         public int Id { get; set; }
         public int FarmerId { get; set; }
         public string BlockNo { get; set; }
@@ -29,5 +35,7 @@ namespace PiyatMandli.DBModel
     
         public virtual Farmer Farmer { get; set; }
         public virtual WindowMaster WindowMaster { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Transaction> Transactions { get; set; }
     }
 }

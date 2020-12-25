@@ -130,21 +130,21 @@ namespace PiyatMandli.Forms
 
         private async void BTNDelete_Click(object sender, RoutedEventArgs e)
         {
-            var record = (Year_model)LSTRecords.SelectedItem;
+            var record = (FarmerLand_model)LSTRecords.SelectedItem;
             if (record != null)
             {
-                var metroWindow = (Application.Current.MainWindow as MetroWindow);
-                if (await metroWindow.ShowMessageAsync(AppManager.Constants.ApplicatioName, $"શું તમે \"{record.Year}\"ની માહિતી કાઢવા માંગો છો?", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
+                if (await this.ShowMessageAsync(AppManager.Constants.ApplicatioName, $"શું તમે \"{record.LandName}\"ની માહિતી કાઢવા માંગો છો?", MessageDialogStyle.AffirmativeAndNegative) == MessageDialogResult.Affirmative)
                 {
                     if (manager.Delete(record.Id).ReturnCode == ResponseMessages.SuccessCode)
                     {
                         _selectedId = 0;
                         txtSearchString.Text = string.Empty;
+                        ClearForm();
                         FillList();
                     }
                     else
                     {
-                        await metroWindow.ShowMessageAsync(AppManager.Constants.ApplicatioName, $"જમીનની માહિતી કાઢવામાં સમસ્યા છે.", MessageDialogStyle.Affirmative);
+                        await this.ShowMessageAsync(AppManager.Constants.ApplicatioName, $"જમીનની માહિતી કાઢવામાં સમસ્યા છે.", MessageDialogStyle.Affirmative);
                     }
                 }
             }

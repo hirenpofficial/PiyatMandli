@@ -58,6 +58,27 @@
           <Property Name="DateCreated" Type="datetime" Nullable="false" />
           <Property Name="DateModified" Type="datetime" Nullable="false" />
         </EntityType>
+        <EntityType Name="Transactions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FarmerId" Type="int" Nullable="false" />
+          <Property Name="LandId" Type="int" Nullable="false" />
+          <Property Name="GarotdarId" Type="int" />
+          <Property Name="Date" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="LandArea" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Rate" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="Crop" Type="nvarchar" MaxLength="100" />
+          <Property Name="YearId" Type="int" Nullable="false" />
+          <Property Name="IsActive" Type="bit" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="DateModified" Type="datetime" Nullable="false" />
+          <Property Name="RateEng" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="LandAreaEng" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="DateEng" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="WindowMaster">
           <Key>
             <PropertyRef Name="Id" />
@@ -107,10 +128,59 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Transactions_FarmerLands">
+          <End Role="FarmerLands" Type="Self.FarmerLands" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FarmerLands">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="LandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Farmers">
+          <End Role="Farmers" Type="Self.Farmers" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="FarmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Farmers1">
+          <End Role="Farmers" Type="Self.Farmers" Multiplicity="0..1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="GarotdarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_YearMaster">
+          <End Role="YearMaster" Type="Self.YearMaster" Multiplicity="1" />
+          <End Role="Transactions" Type="Self.Transactions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YearMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transactions">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="PiyatMandliModelStoreContainer">
           <EntitySet Name="Configs" EntityType="Self.Configs" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FarmerLands" EntityType="Self.FarmerLands" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Farmers" EntityType="Self.Farmers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Transactions" EntityType="Self.Transactions" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WindowMaster" EntityType="Self.WindowMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="YearMaster" EntityType="Self.YearMaster" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_FarmerLands_Farmers" Association="Self.FK_FarmerLands_Farmers">
@@ -120,6 +190,22 @@
           <AssociationSet Name="FK_FarmerLands_WindowMaster" Association="Self.FK_FarmerLands_WindowMaster">
             <End Role="WindowMaster" EntitySet="WindowMaster" />
             <End Role="FarmerLands" EntitySet="FarmerLands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_FarmerLands" Association="Self.FK_Transactions_FarmerLands">
+            <End Role="FarmerLands" EntitySet="FarmerLands" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Farmers" Association="Self.FK_Transactions_Farmers">
+            <End Role="Farmers" EntitySet="Farmers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Farmers1" Association="Self.FK_Transactions_Farmers1">
+            <End Role="Farmers" EntitySet="Farmers" />
+            <End Role="Transactions" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_YearMaster" Association="Self.FK_Transactions_YearMaster">
+            <End Role="YearMaster" EntitySet="YearMaster" />
+            <End Role="Transactions" EntitySet="Transactions" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -152,6 +238,7 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Farmer" Relationship="Self.FK_FarmerLands_Farmers" FromRole="FarmerLands" ToRole="Farmers" />
           <NavigationProperty Name="WindowMaster" Relationship="Self.FK_FarmerLands_WindowMaster" FromRole="FarmerLands" ToRole="WindowMaster" />
+          <NavigationProperty Name="Transactions" Relationship="PiyatMandliModel.FK_Transactions_FarmerLands" FromRole="FarmerLand" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="Farmer">
           <Key>
@@ -181,6 +268,8 @@
           <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="DateModified" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="FarmerLands" Relationship="Self.FK_FarmerLands_Farmers" FromRole="Farmers" ToRole="FarmerLands" />
+          <NavigationProperty Name="Transactions" Relationship="PiyatMandliModel.FK_Transactions_Farmers" FromRole="Farmer" ToRole="Transaction" />
+          <NavigationProperty Name="Transactions1" Relationship="PiyatMandliModel.FK_Transactions_Farmers1" FromRole="Farmer" ToRole="Transaction" />
         </EntityType>
         <EntityType Name="WindowMaster">
           <Key>
@@ -232,6 +321,23 @@
             <End Role="FarmerLands" EntitySet="FarmerLands" />
           </AssociationSet>
           <EntitySet Name="YearMasters" EntityType="PiyatMandliModel.YearMaster" />
+          <EntitySet Name="Transactions" EntityType="PiyatMandliModel.Transaction" />
+          <AssociationSet Name="FK_Transactions_FarmerLands" Association="PiyatMandliModel.FK_Transactions_FarmerLands">
+            <End Role="FarmerLand" EntitySet="FarmerLands" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Farmers" Association="PiyatMandliModel.FK_Transactions_Farmers">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_Farmers1" Association="PiyatMandliModel.FK_Transactions_Farmers1">
+            <End Role="Farmer" EntitySet="Farmers" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Transactions_YearMaster" Association="PiyatMandliModel.FK_Transactions_YearMaster">
+            <End Role="YearMaster" EntitySet="YearMasters" />
+            <End Role="Transaction" EntitySet="Transactions" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="YearMaster">
           <Key>
@@ -246,7 +352,81 @@
           <Property Name="ModifiedDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="IsActive" Type="Boolean" Nullable="false" />
           <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Transactions" Relationship="PiyatMandliModel.FK_Transactions_YearMaster" FromRole="YearMaster" ToRole="Transaction" />
         </EntityType>
+        <EntityType Name="Transaction">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FarmerId" Type="Int32" Nullable="false" />
+          <Property Name="LandId" Type="Int32" Nullable="false" />
+          <Property Name="GarotdarId" Type="Int32" />
+          <Property Name="Date" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="LandArea" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Rate" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Crop" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="YearId" Type="Int32" Nullable="false" />
+          <Property Name="IsActive" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="DateModified" Type="DateTime" Precision="3" Nullable="false" />
+          <NavigationProperty Name="FarmerLand" Relationship="PiyatMandliModel.FK_Transactions_FarmerLands" FromRole="Transaction" ToRole="FarmerLand" />
+          <NavigationProperty Name="Farmer" Relationship="PiyatMandliModel.FK_Transactions_Farmers" FromRole="Transaction" ToRole="Farmer" />
+          <NavigationProperty Name="Garotdar" Relationship="PiyatMandliModel.FK_Transactions_Farmers1" FromRole="Transaction" ToRole="Farmer" />
+          <NavigationProperty Name="YearMaster" Relationship="PiyatMandliModel.FK_Transactions_YearMaster" FromRole="Transaction" ToRole="YearMaster" />
+          <Property Name="IsDeleted" Type="Boolean" Nullable="false" />
+          <Property Name="RateEng" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="LandAreaEng" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DateEng" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_Transactions_FarmerLands">
+          <End Type="PiyatMandliModel.FarmerLand" Role="FarmerLand" Multiplicity="1" />
+          <End Type="PiyatMandliModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FarmerLand">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="LandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Farmers">
+          <End Type="PiyatMandliModel.Farmer" Role="Farmer" Multiplicity="1" />
+          <End Type="PiyatMandliModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="FarmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_Farmers1">
+          <End Type="PiyatMandliModel.Farmer" Role="Farmer" Multiplicity="0..1" />
+          <End Type="PiyatMandliModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Farmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="GarotdarId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Transactions_YearMaster">
+          <End Type="PiyatMandliModel.YearMaster" Role="YearMaster" Multiplicity="1" />
+          <End Type="PiyatMandliModel.Transaction" Role="Transaction" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="YearMaster">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Transaction">
+              <PropertyRef Name="YearId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -332,6 +512,28 @@
                 <ScalarProperty Name="ClosingDate" ColumnName="ClosingDate" />
                 <ScalarProperty Name="Rate" ColumnName="Rate" />
                 <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Transactions">
+            <EntityTypeMapping TypeName="PiyatMandliModel.Transaction">
+              <MappingFragment StoreEntitySet="Transactions">
+                <ScalarProperty Name="DateEng" ColumnName="DateEng" />
+                <ScalarProperty Name="LandAreaEng" ColumnName="LandAreaEng" />
+                <ScalarProperty Name="RateEng" ColumnName="RateEng" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="DateModified" ColumnName="DateModified" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="YearId" ColumnName="YearId" />
+                <ScalarProperty Name="Crop" ColumnName="Crop" />
+                <ScalarProperty Name="Rate" ColumnName="Rate" />
+                <ScalarProperty Name="LandArea" ColumnName="LandArea" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="GarotdarId" ColumnName="GarotdarId" />
+                <ScalarProperty Name="LandId" ColumnName="LandId" />
+                <ScalarProperty Name="FarmerId" ColumnName="FarmerId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
